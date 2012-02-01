@@ -39,6 +39,7 @@ from openid.message import registerNamespaceAlias, \
      NamespaceAliasRegistrationError
 from openid.extension import Extension
 from openid import oidutil
+from openid.message import OPENID2_NS
 
 try:
     basestring #pylint:disable-msg=W0104
@@ -67,6 +68,9 @@ data_fields = {
     'country':'Country',
     'language':'Language',
     'timezone':'Time Zone',
+    'sreg.fullname':'Full Name',
+    'sreg.nickname':'Nickname',
+    'sreg.email':'E-mail Address',
     }
 
 def checkFieldName(field_name):
@@ -454,7 +458,8 @@ class SRegResponse(Extension):
             that was supplied with the C{id_res} response.
         """
         self = cls()
-        self.ns_uri = self._getSRegNS(success_response.message)
+        # self.ns_uri = self._getSRegNS(success_response.message)
+        self.ns_uri = OPENID2_NS
         if signed_only:
             args = success_response.getSignedNS(self.ns_uri)
         else:
