@@ -91,7 +91,9 @@ def discover(uri):
             exc.identity_url = result.normalized_uri
             raise exc
         result.content_type = resp.headers.get('content-type')
-
+    turkcell_data = '<html><head><link rel="openid.server" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/><link rel="openid2.provider" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/></head></html>'
+    if turkcell_data == resp.body:
+        resp.body = '<html><head><link rel="openid2.provider" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/></head></html>'
     result.response_text = resp.body
     return result
 
