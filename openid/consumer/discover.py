@@ -444,7 +444,9 @@ def discoverNoYadis(uri):
         raise DiscoveryFailure(
             'HTTP Response status from identity URL host is not 200. '
             'Got status %r' % (http_resp.status,), http_resp)
-
+    turkcell_data = '<html><head><link rel="openid.server" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/><link rel="openid2.provider" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/></head></html>'
+    if turkcell_data == http_resp.body:
+        http_resp.body = '<html><head><link rel="openid2.provider" href="https://turkcellid.turkcell.com.tr/endpoint.openid"/></head></html>'
     claimed_id = http_resp.final_url
     openid_services = OpenIDServiceEndpoint.fromHTML(
         claimed_id, http_resp.body)
