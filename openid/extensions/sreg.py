@@ -71,6 +71,10 @@ data_fields = {
     'sreg.fullname':'Full Name',
     'sreg.nickname':'Nickname',
     'sreg.email':'E-mail Address',
+
+    # Turkcell OpenID needs these two fields
+    'sreg.userIndex': 'User index',
+    'userIndex': 'User index',
     }
 
 def checkFieldName(field_name):
